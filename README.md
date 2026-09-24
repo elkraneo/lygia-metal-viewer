@@ -42,7 +42,7 @@ open LygiaViewer.app --args -tour kaleidoscopeNoise,islamicStar,mandala,gallery 
 
 ## LYGIA version
 
-`External/lygia` is a submodule on the `metal/lighting` branch of [elkraneo/lygia](https://github.com/elkraneo/lygia). That branch builds on the Metal fixes, ports and `inline` change proposed upstream in [#318](https://github.com/patriciogonzalezvivo/lygia/pull/318), [#319](https://github.com/patriciogonzalezvivo/lygia/pull/319) and [#320](https://github.com/patriciogonzalezvivo/lygia/pull/320), and adds a Metal port of LYGIA's lighting and sample modules that isn't proposed upstream yet. Several demos (star, flower and gear SDFs, kaleidoscope, triTile, the immersive scene's lighting, ...) don't compile against upstream `main` until those land.
+`External/lygia` is a submodule on the `metal/lighting` branch of [elkraneo/lygia](https://github.com/elkraneo/lygia). That branch builds on the Metal fixes and ports proposed upstream in [#318](https://github.com/patriciogonzalezvivo/lygia/pull/318), [#319](https://github.com/patriciogonzalezvivo/lygia/pull/319) and [#320](https://github.com/patriciogonzalezvivo/lygia/pull/320), and adds a Metal port of LYGIA's lighting and sample modules that isn't proposed upstream yet. Several demos (star, flower and gear SDFs, kaleidoscope, triTile, the immersive scene's lighting, ...) don't compile against upstream `main` until those land.
 
 To build against another checkout, set it in `Config/Local.xcconfig`:
 
@@ -55,7 +55,7 @@ LYGIA_SOURCE_ROOT = /path/to/folder/containing/lygia
 1. Add `LygiaViewer/Shaders/<Module>/<id>.metal` with one `[[ stitchable ]]` function named `<id>`, using the signature documented in `Shaders/Common.h`.
 2. Add a `Demo(...)` entry in `LygiaViewer/Model/DemoCatalog.swift`.
 
-LYGIA's Metal functions are `inline` on this branch, so any number of `.metal` files can include the same LYGIA file. The older demos still wrap their includes in `LYGIA_BEGIN` / `LYGIA_END` (an anonymous namespace), which was the workaround before; it's harmless and not needed for new demos.
+LYGIA's Metal functions are `static inline` on this branch, so any number of `.metal` files can include the same LYGIA file, even with different options ([why not plain `inline`](https://gist.github.com/elkraneo/c7794ed71015fd07858dab10f00077be)). If a demo defines `raymarchMap`, make it `static inline` too. The older demos still wrap their includes in `LYGIA_BEGIN` / `LYGIA_END` (an anonymous namespace), the workaround from before; it's harmless and not needed for new demos.
 
 ## Immersive (visionOS)
 

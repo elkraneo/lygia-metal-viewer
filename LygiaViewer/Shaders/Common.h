@@ -9,10 +9,10 @@
 //   layerEffect:      half4  name(float2 position, SwiftUI::Layer layer,  float2 size, float time, float4 params)
 //   distortionEffect: float2 name(float2 position,                        float2 size, float time, float4 params)
 //
-// LYGIA includes go inside `namespace { ... }` (see LYGIA_BEGIN / LYGIA_END).
-// LYGIA's .msl functions are plain (non-inline) definitions, so including the
-// same file from two .metal files makes the metallib link fail with
-// "duplicated symbol". An anonymous namespace gives them internal linkage.
+// Older demos wrap LYGIA includes in `namespace { ... }` (LYGIA_BEGIN /
+// LYGIA_END). That was needed when LYGIA's .msl functions were plain
+// definitions, which fail to link from two .metal files. They're now
+// `static inline`, so new demos can include LYGIA directly.
 
 #pragma once
 

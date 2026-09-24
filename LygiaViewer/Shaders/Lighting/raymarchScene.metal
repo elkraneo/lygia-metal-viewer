@@ -20,10 +20,10 @@ using namespace metal;
 #include "lygia/color/tonemap/aces.msl"
 #include "lygia/color/space/linear2gamma.msl"
 
-inline Material closest(Material a, Material b) { return a.sdf < b.sdf ? a : b; }
+static inline Material closest(Material a, Material b) { return a.sdf < b.sdf ? a : b; }
 
 // The scene: raymarch() calls this for every step.
-inline Material raymarchMap(float3 p) {
+static inline Material raymarchMap(float3 p) {
     Material m = materialNew(float3(0.45, 0.45, 0.44), 0.8, 0.0, planeSDF(p + float3(0.0, 1.0, 0.0)));
     m = closest(m, materialNew(float3(0.9, 0.08, 0.06), 0.25, 0.0, sphereSDF(p - float3(-1.3, 0.0, 0.0), 1.0)));
     m = closest(m, materialNew(float3(1.0, 0.78, 0.34), 0.15, 1.0, sphereSDF(p - float3(1.3, 0.0, 0.0), 1.0)));

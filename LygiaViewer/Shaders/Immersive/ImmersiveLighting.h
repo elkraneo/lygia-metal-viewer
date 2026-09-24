@@ -36,7 +36,7 @@ struct ImmersiveSurface {
 };
 
 /// `toEye` points from the surface to the eye.
-inline float3 immersiveShade(ImmersiveSurface s, float3 toEye) {
+static inline float3 immersiveShade(ImmersiveSurface s, float3 toEye) {
     Material mat = materialNew();
     mat.position = s.position;
     mat.normal = s.normal;
