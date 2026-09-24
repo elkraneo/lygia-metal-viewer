@@ -8,6 +8,7 @@ enum DemoModule: String, CaseIterable, Identifiable {
     case color = "Color"
     case draw = "Draw"
     case distort = "Distort"
+    case lighting = "Lighting"
     case ornament = "Ornaments"
 
     var id: String { rawValue }
@@ -20,6 +21,7 @@ enum DemoModule: String, CaseIterable, Identifiable {
         case .color: "paintpalette"
         case .draw: "pencil.and.outline"
         case .distort: "camera.filters"
+        case .lighting: "lightbulb"
         case .ornament: "seal"
         }
     }

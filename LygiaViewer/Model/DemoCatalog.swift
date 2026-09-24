@@ -2,7 +2,7 @@ import Foundation
 
 /// All gallery demos. Parameter order must match `params.x/y/z/w` in the shader.
 enum DemoCatalog {
-    static let all: [Demo] = generative + sdf + space + color + draw + distort + ornament
+    static let all: [Demo] = generative + sdf + space + color + draw + distort + lighting + ornament
 
     static func demo(id: String) -> Demo? { all.first { $0.id == id } }
 
@@ -141,6 +141,17 @@ enum DemoCatalog {
     ]
 
     // MARK: Ornaments
+
+    // MARK: Lighting
+
+    static let lighting: [Demo] = [
+        Demo(id: "pbrSpheres", title: "PBR materials", module: .lighting,
+             summary: "LYGIA pbr step by step: roughness across, metallic down, lit by a LightDirectional built at runtime and fakeCube.",
+             params: [.slider("Sun speed", 0...2, 0.5), .slider("Albedo hue", 0...1, 0.6), .slider("Exposure", 0.2...3, 1)]),
+        Demo(id: "raymarchScene", title: "Raymarched scene", module: .lighting,
+             summary: "raymarch() over a raymarchMap() scene, shaded with pbr, soft shadows and ambient occlusion.",
+             params: [.slider("Orbit speed", 0...1, 0.15), .slider("Distance", 4...10, 6), .slider("Height", -0.5...4, 2), .slider("Exposure", 0.2...3, 0.55)]),
+    ]
 
     static let ornament: [Demo] = [
         Demo(id: "hexRosette", title: "Hex rosettes", module: .ornament,

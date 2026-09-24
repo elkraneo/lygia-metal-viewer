@@ -4,7 +4,7 @@ A SwiftUI app for browsing the Metal (MSL) port of the [LYGIA shader library](ht
 
 ![Kaleidoscope demo](docs/kaleidoscope.png)
 
-- **38 live demos** across generative noise, SDFs, tiling, color, draw, distort and geometric ornaments. Each demo has parameter controls and shows the LYGIA files it includes, the calls it makes and its full source.
+- **40 live demos** across generative noise, SDFs, tiling, color, draw, distort, lighting (LYGIA's `pbr` and `raymarch`) and geometric ornaments. Each demo has parameter controls and shows the LYGIA files it includes, the calls it makes and its full source.
 - **Playground (macOS):** write Metal with `#include "lygia/..."` and see it render as you type. The app inlines the includes itself, because Metal's runtime compiler can't read files.
 - **Immersive (visionOS):** a fully immersive, raymarched LYGIA scene drawn by the app's own Metal renderer through Compositor Services (see [Immersive](#immersive-visionos)).
 - Demos are SwiftUI `[[ stitchable ]]` shaders (`.colorEffect`, `.layerEffect`, `.distortionEffect`), so they run the same on all three platforms.
