@@ -14,11 +14,6 @@ settings:
     SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
     MARKETING_VERSION: "0.1"
     CURRENT_PROJECT_VERSION: "1"
-    # Ad-hoc "Sign to Run Locally" so macOS and simulator builds work without
-    # a team. For device builds set DEVELOPMENT_TEAM and CODE_SIGN_STYLE: Automatic.
-    DEVELOPMENT_TEAM: ""
-    CODE_SIGN_STYLE: Manual
-    CODE_SIGN_IDENTITY: "-"
 
 targets:
   LygiaViewer:
@@ -37,7 +32,12 @@ targets:
       base:
         PRODUCT_NAME: LygiaViewer
         PRODUCT_BUNDLE_IDENTIFIER: io.210x7.LygiaViewer
-        CODE_SIGN_IDENTITY: "-" # overrides xcodegen's "iPhone Developer" preset
+        # Signing comes from Config/Viewer.xcconfig (ad-hoc by default), which
+        # Config/Local.xcconfig can override for device builds. Set here so it
+        # also overrides xcodegen's "iPhone Developer" preset.
+        CODE_SIGN_STYLE: $(VIEWER_CODE_SIGN_STYLE)
+        CODE_SIGN_IDENTITY: $(VIEWER_CODE_SIGN_IDENTITY)
+        DEVELOPMENT_TEAM: $(VIEWER_DEVELOPMENT_TEAM)
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_FILE: LygiaViewer/Resources/Info.plist
         INFOPLIST_KEY_CFBundleDisplayName: LYGIA Viewer

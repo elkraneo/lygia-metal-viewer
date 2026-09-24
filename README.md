@@ -24,7 +24,13 @@ xcodegen generate
 open LygiaViewer.xcodeproj
 ```
 
-The target builds for macOS, iOS and visionOS. Builds are signed ad-hoc; set `DEVELOPMENT_TEAM` in `project.yml` to run on a device.
+The target builds for macOS, iOS and visionOS. Builds are signed ad-hoc. To run on a device, create `Config/Local.xcconfig` (git-ignored) with your team:
+
+```
+VIEWER_CODE_SIGN_STYLE = Automatic
+VIEWER_CODE_SIGN_IDENTITY = Apple Development
+VIEWER_DEVELOPMENT_TEAM = <your team ID>
+```
 
 `scripts/check-shaders.sh` compiles and links every demo shader without building the app.
 
@@ -38,7 +44,7 @@ open LygiaViewer.app --args -tour kaleidoscopeNoise,islamicStar,mandala,gallery 
 
 `External/lygia` is a submodule on the `metal/lighting` branch of [elkraneo/lygia](https://github.com/elkraneo/lygia). That branch builds on the Metal fixes, ports and `inline` change proposed upstream in [#318](https://github.com/patriciogonzalezvivo/lygia/pull/318), [#319](https://github.com/patriciogonzalezvivo/lygia/pull/319) and [#320](https://github.com/patriciogonzalezvivo/lygia/pull/320), and adds a Metal port of LYGIA's lighting and sample modules that isn't proposed upstream yet. Several demos (star, flower and gear SDFs, kaleidoscope, triTile, the immersive scene's lighting, ...) don't compile against upstream `main` until those land.
 
-To build against another checkout, create `Config/Local.xcconfig` (git-ignored):
+To build against another checkout, set it in `Config/Local.xcconfig`:
 
 ```
 LYGIA_SOURCE_ROOT = /path/to/folder/containing/lygia

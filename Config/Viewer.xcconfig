@@ -1,6 +1,15 @@
 // Folder that contains `lygia/`. Defaults to the External/lygia submodule.
-// To build against another checkout, create Config/Local.xcconfig (git-ignored) with e.g.
-//   LYGIA_SOURCE_ROOT = $(SRCROOT)/../source
 LYGIA_SOURCE_ROOT = $(SRCROOT)/External
 
+// Ad-hoc "Sign to Run Locally", so macOS and simulator builds need no team.
+VIEWER_CODE_SIGN_STYLE = Manual
+VIEWER_CODE_SIGN_IDENTITY = -
+VIEWER_DEVELOPMENT_TEAM =
+
+// Local overrides (git-ignored), e.g. to build against another LYGIA checkout
+// or to sign for a device:
+//   LYGIA_SOURCE_ROOT = $(SRCROOT)/../source
+//   VIEWER_CODE_SIGN_STYLE = Automatic
+//   VIEWER_CODE_SIGN_IDENTITY = Apple Development
+//   VIEWER_DEVELOPMENT_TEAM = <your team ID>
 #include? "Local.xcconfig"
