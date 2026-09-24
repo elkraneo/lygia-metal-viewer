@@ -2,7 +2,7 @@
 
 A SwiftUI app for browsing the Metal (MSL) port of the [LYGIA shader library](https://github.com/patriciogonzalezvivo/lygia) on macOS, iOS and visionOS.
 
-![Hex rosettes demo](docs/hexRosette.png)
+![Kaleidoscope demo](docs/kaleidoscope.png)
 
 - **38 live demos** across generative noise, SDFs, tiling, color, draw, distort and geometric ornaments. Each demo has parameter controls and shows the LYGIA files it includes, the calls it makes and its full source.
 - **Playground (macOS):** write Metal with `#include "lygia/..."` and see it render as you type. The app inlines the includes itself, because Metal's runtime compiler can't read files.
@@ -26,6 +26,12 @@ open LygiaViewer.xcodeproj
 The target builds for macOS, iOS and visionOS. Builds are signed ad-hoc; set `DEVELOPMENT_TEAM` in `project.yml` to run on a device.
 
 `scripts/check-shaders.sh` compiles and links every demo shader without building the app.
+
+For screen recordings, `-tour` steps through demos by itself and sweeps each one's first slider:
+
+```sh
+open LygiaViewer.app --args -tour kaleidoscopeNoise,islamicStar,mandala,gallery -tourInterval 3.5
+```
 
 ## LYGIA version
 

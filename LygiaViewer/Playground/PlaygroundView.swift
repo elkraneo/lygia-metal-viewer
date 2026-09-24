@@ -93,7 +93,7 @@ struct PlaygroundView: View {
                 }
                 .frame(maxHeight: 160)
             }
-            Text("LYGIA: \(lygiaRoot.path)/lygia")
+            Text("LYGIA: \((lygiaRoot.path as NSString).abbreviatingWithTildeInPath)/lygia")
                 .font(.caption2)
                 .foregroundStyle(.secondary)
                 .lineLimit(1)
