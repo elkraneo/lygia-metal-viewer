@@ -12,6 +12,10 @@ A SwiftUI app for browsing the Metal port of the [LYGIA shader library](https://
 |---|---|
 | ![All demos](docs/gallery.png) | ![Playground](docs/playground.png) |
 
+| iPhone | Vision Pro (immersive, simulator) |
+|---|---|
+| <img src="docs/iphone.png" alt="Khatam stars on iPhone" width="240"> | <img src="docs/immersive.png" alt="Immersive scene in the visionOS simulator" width="560"> |
+
 ## Build
 
 Requires Xcode 26+ and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
