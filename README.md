@@ -16,9 +16,15 @@ A SwiftUI app for browsing the Metal port of the [LYGIA shader library](https://
 |---|---|
 | <img src="docs/iphone.png" alt="Khatam stars on iPhone" width="240"> | <img src="docs/immersive.png" alt="Immersive scene in the visionOS simulator" width="560"> |
 
+<details><summary>All 40 demos</summary>
+
+![All 40 demos](docs/all-demos.png)
+
+</details>
+
 ## Build
 
-Requires Xcode 26+ and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
+Built and tested with Xcode 27 and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
 
 ```sh
 git clone --recursive https://github.com/elkraneo/lygia-metal-viewer.git
