@@ -38,6 +38,9 @@ struct ContentView: View {
                         Label("Playground", systemImage: "chevron.left.forwardslash.chevron.right")
                     }
                     #endif
+                    #if os(visionOS)
+                    ImmersiveToggle()
+                    #endif
                 }
                 ForEach(DemoModule.allCases) { module in
                     Section(module.rawValue) {

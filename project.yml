@@ -45,6 +45,9 @@ targets:
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown"
         INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.developer-tools
+        # visionOS immersive space: ARKit world tracking supplies the head pose.
+        "INFOPLIST_KEY_NSWorldSensingUsageDescription[sdk=xr*]": "LYGIA Viewer uses your head position to render its immersive Metal scene."
+        "INFOPLIST_KEY_UIApplicationSupportsMultipleScenes[sdk=xr*]": YES
         TARGETED_DEVICE_FAMILY: "1,2,7"
 
         # LYGIA_SOURCE_ROOT (the folder that contains `lygia/`) comes from

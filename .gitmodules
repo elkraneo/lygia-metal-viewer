@@ -1,4 +1,4 @@
 [submodule "External/lygia"]
 	path = External/lygia
 	url = https://github.com/elkraneo/lygia.git
-	branch = metal/port-missing
+	branch = metal/lighting
