@@ -1,0 +1,6 @@
+// Folder that contains `lygia/`. Defaults to the External/lygia submodule.
+// To build against another checkout, create Config/Local.xcconfig (git-ignored) with e.g.
+//   LYGIA_SOURCE_ROOT = $(SRCROOT)/../source
+LYGIA_SOURCE_ROOT = $(SRCROOT)/External
+
+#include? "Local.xcconfig"

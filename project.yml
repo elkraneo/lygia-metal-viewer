@@ -1,0 +1,77 @@
+name: LygiaViewer
+
+options:
+  bundleIdPrefix: io.210x7
+  createIntermediateGroups: true
+  deploymentTarget:
+    macOS: "15.0"
+    iOS: "18.0"
+    visionOS: "2.0"
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+    MARKETING_VERSION: "0.1"
+    CURRENT_PROJECT_VERSION: "1"
+    # Ad-hoc "Sign to Run Locally" so macOS and simulator builds work without
+    # a team. For device builds set DEVELOPMENT_TEAM and CODE_SIGN_STYLE: Automatic.
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Manual
+    CODE_SIGN_IDENTITY: "-"
+
+targets:
+  LygiaViewer:
+    type: application
+    # One multiplatform target: SwiftUI shaders run the same on all three.
+    supportedDestinations: [macOS, iOS, visionOS]
+    platform: auto
+    sources:
+      - path: LygiaViewer
+        excludes:
+          - "Resources/Info.plist"
+    configFiles:
+      Debug: Config/Viewer.xcconfig
+      Release: Config/Viewer.xcconfig
+    settings:
+      base:
+        PRODUCT_NAME: LygiaViewer
+        PRODUCT_BUNDLE_IDENTIFIER: io.210x7.LygiaViewer
+        CODE_SIGN_IDENTITY: "-" # overrides xcodegen's "iPhone Developer" preset
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_FILE: LygiaViewer/Resources/Info.plist
+        INFOPLIST_KEY_CFBundleDisplayName: LYGIA Viewer
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown"
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.developer-tools
+        TARGETED_DEVICE_FAMILY: "1,2,7"
+
+        # LYGIA_SOURCE_ROOT (the folder that contains `lygia/`) comes from
+        # Config/Viewer.xcconfig. .metal files use `#include "lygia/sdf/starSDF.msl"`.
+        MTL_HEADER_SEARCH_PATHS: $(LYGIA_SOURCE_ROOT) $(SRCROOT)/LygiaViewer/Shaders
+        # LYGIA headers define many overloads; each demo only uses a few.
+        MTL_COMPILER_FLAGS: -Wno-unused-function
+
+        # The macOS Playground reads LYGIA from disk at runtime, so no App Sandbox.
+        ENABLE_APP_SANDBOX: NO
+        ENABLE_HARDENED_RUNTIME: NO
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+      configs:
+        Debug:
+          SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+    postBuildScripts:
+      - name: Copy shader sources (for the in-app source view)
+        basedOnDependencyAnalysis: false
+        script: |
+          DEST="${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ShaderSources"
+          mkdir -p "$DEST"
+          find "${SRCROOT}/LygiaViewer/Shaders" \( -name '*.metal' -o -name '*.h' \) -exec cp {} "$DEST/" \;
+
+schemes:
+  LygiaViewer:
+    build:
+      targets:
+        LygiaViewer: all
+    run:
+      config: Debug
