@@ -108,7 +108,7 @@ struct Demo: Identifiable, Hashable {
 
     /// The shader's `params` for slider values held constant since time 0: each
     /// speed becomes speed * time. Used for snapshots and validation; the live
-    /// preview accumulates speeds frame by frame instead (`SpeedIntegrator`).
+    /// preview accumulates speeds frame by frame instead (`PreviewClock`).
     func arguments(_ values: SIMD4<Float>, time: Float) -> SIMD4<Float> {
         values.replacing(with: values * time, where: speeds)
     }

@@ -11,39 +11,43 @@ struct ShaderPreview: View {
     let demo: Demo
     var values: SIMD4<Float>
     var paused: Bool = false
-    @State private var integrator = SpeedIntegrator()
+    @State private var clock = PreviewClock()
 
     var body: some View {
         TimelineView(.animation(paused: paused)) { context in
-            let time = Float(context.date.timeIntervalSince(ShaderClock.start))
-            let arguments = integrator.advance(demo: demo, values: values, date: context.date, time: time)
+            let frame = clock.advance(demo: demo, values: values, date: context.date, paused: paused)
             GeometryReader { proxy in
-                ShaderSurface(demo: demo, arguments: arguments, size: proxy.size, time: time)
+                ShaderSurface(demo: demo, arguments: frame.arguments, size: proxy.size, time: frame.time)
             }
         }
         .clipped()
     }
 }
 
-/// Accumulates a demo's speed sliders frame by frame, so moving a speed slider
-/// changes the rate from then on. Multiplying by `time` instead would rescale
-/// everything accumulated since launch and make the image jump.
-final class SpeedIntegrator {
+/// A preview's own time, which stops while paused, and its speed sliders
+/// accumulated frame by frame, so moving a speed slider changes the rate from
+/// then on. Multiplying by `time` instead would rescale everything accumulated
+/// since launch and make the image jump.
+final class PreviewClock {
     private var demoID: String?
+    private var time: Float = 0
     private var accumulated = SIMD4<Float>(repeating: 0)
     private var last: Date?
 
-    func advance(demo: Demo, values: SIMD4<Float>, date: Date, time: Float) -> SIMD4<Float> {
+    func advance(demo: Demo, values: SIMD4<Float>, date: Date, paused: Bool) -> (time: Float, arguments: SIMD4<Float>) {
         if let last, demoID == demo.id {
-            // Clamped, so resuming after a pause doesn't jump.
-            accumulated += values * Float(min(max(date.timeIntervalSince(last), 0), 0.1))
+            // Clamped, so a frame after a stall or a pause doesn't jump.
+            let dt = paused ? 0 : Float(min(max(date.timeIntervalSince(last), 0), 0.1))
+            time += dt
+            accumulated += values * dt
         } else {
-            // Start where constant speeds would be, so previews stay in sync.
+            // Start at the shared time with constant speeds, so previews stay in sync.
             demoID = demo.id
+            time = Float(date.timeIntervalSince(ShaderClock.start))
             accumulated = values * time
         }
         last = date
-        return values.replacing(with: accumulated, where: demo.speeds)
+        return (time, values.replacing(with: accumulated, where: demo.speeds))
     }
 }
 
