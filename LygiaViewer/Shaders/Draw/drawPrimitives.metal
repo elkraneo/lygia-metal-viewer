@@ -15,7 +15,7 @@ using namespace metal;
 [[ stitchable ]] half4 drawPrimitives(float2 position, half4 color, float2 size, float time, float4 params) {
     float2 st = lygiaST(position, size);
     float4 t = sqTile(st * 2.0);
-    float2 p = rotate(t.xy, time * params.w);
+    float2 p = rotate(t.xy, params.w);
     int cell = int(t.z) + int(t.w) * 2; // 0..3 inside the visible square
     int mode = int(params.z + 0.5);
     float s = params.x, w = params.y;

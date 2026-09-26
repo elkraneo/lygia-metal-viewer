@@ -10,7 +10,7 @@ using namespace metal;
 // params: x = scale, y = speed, z = streak density
 [[ stitchable ]] half4 curlFlow(float2 position, half4 color, float2 size, float time, float4 params) {
     float2 st = lygiaST(position, size) * params.x;
-    float3 v = curl(float3(st, time * params.y));
+    float3 v = curl(float3(st, params.y));
     float2 dir = normalize(v.xy + 1e-5);
 
     float3 c = 0.5 + 0.5 * normalize(v + 1e-5);

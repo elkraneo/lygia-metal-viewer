@@ -19,7 +19,7 @@ using namespace metal;
     float2 st = lygiaST(position, size);
     float4 t = hexTile(st * params.x);
     float ring = fmod(abs(t.z + t.w), 2.0) * 2.0 - 1.0;   // alternate rotation direction
-    float2 p = rotate(t.xy, time * params.y * ring);
+    float2 p = rotate(t.xy, params.y * ring);
     int petals = int(params.z + 0.5);
     float w = params.w;
 

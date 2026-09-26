@@ -23,7 +23,7 @@ using namespace metal;
 
     float v1 = vesicaSDF(p, params.y);
     float v2 = vesicaSDF(rotate(p, PI * 0.5), params.y);
-    float shimmer = 0.5 + 0.5 * sin(time * params.w + (t.z + t.w) * 0.8);
+    float shimmer = 0.5 + 0.5 * sin(params.w + (t.z + t.w) * 0.8);
 
     float3 c = float3(0.08, 0.10, 0.16);
     c = mix(c, float3(0.20, 0.35, 0.55) * (0.6 + 0.4 * shimmer), fill(max(v1, v2), 1.0, 0.01));

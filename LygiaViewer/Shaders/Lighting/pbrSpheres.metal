@@ -43,7 +43,7 @@ using namespace metal;
     shadingDataNew(mat, shadingData);
     lightIBLEvaluate(mat, shadingData);
 
-    float a = time * params.x;
+    float a = params.x;
     LightDirectional sun;
     sun.direction = normalize(float3(cos(a), 0.7, 0.6 + 0.4 * sin(a)));
     sun.color = float3(1.0, 0.95, 0.88);

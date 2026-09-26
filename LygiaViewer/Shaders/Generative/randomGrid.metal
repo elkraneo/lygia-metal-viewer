@@ -8,7 +8,7 @@ using namespace metal;
 // params: x = mode (0 white noise, 1 random per cell, 2 random3 per cell), y = cells, z = reseed speed
 [[ stitchable ]] half4 randomGrid(float2 position, half4 color, float2 size, float time, float4 params) {
     float2 st = lygiaST(position, size);
-    float seed = floor(time * params.z);
+    float seed = floor(params.z);
     int mode = int(params.x + 0.5);
 
     if (mode == 0) {

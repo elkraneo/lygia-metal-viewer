@@ -14,7 +14,7 @@ using namespace metal;
     float2 st = lygiaST(position, size);
     float4 t = hexTile(st * params.x);
     float r = random(t.zw);
-    float wave = sin(length(t.zw) * 0.6 - time * params.y) * 0.5 + 0.5;
+    float wave = sin(length(t.zw) * 0.6 - params.y) * 0.5 + 0.5;
 
     float d = hexSDF(t.xy);
     float3 c = cosPalette(r * 0.4 + wave * 0.3, float3(0.5), float3(0.45), float3(1.0), float3(0.55, 0.65, 0.80));

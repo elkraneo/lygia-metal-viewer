@@ -10,7 +10,7 @@ using namespace metal;
 [[ stitchable ]] half4 psrdnoiseFlow(float2 position, half4 color, float2 size, float time, float4 params) {
     float2 st = lygiaST(position, size) * params.x;
     float2 g;
-    float n = psrdnoise(st, float2(params.z), time * params.y, g);
+    float n = psrdnoise(st, float2(params.z), params.y, g);
 
     // Fake lighting from the analytic gradient.
     float3 normal = normalize(float3(-g * 0.25, 1.0));

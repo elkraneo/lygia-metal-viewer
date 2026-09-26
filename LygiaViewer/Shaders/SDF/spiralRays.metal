@@ -13,8 +13,8 @@ using namespace metal;
 // params: x = spiral turns, y = rays, z = rotation speed
 [[ stitchable ]] half4 spiralRays(float2 position, half4 color, float2 size, float time, float4 params) {
     float2 st = lygiaST(position, size);
-    float spiral = step(0.5, spiralSDF(rotate(st, -time * params.z), params.x));
-    float rays = step(0.5, raysSDF(rotate(st, time * params.z * 0.5), int(params.y + 0.5)));
+    float spiral = step(0.5, spiralSDF(rotate(st, -params.z), params.x));
+    float rays = step(0.5, raysSDF(rotate(st, params.z * 0.5), int(params.y + 0.5)));
     float v = abs(spiral - rays);
     v *= fill(circleSDF(st), 0.9);
     v = mix(v, 1.0, stroke(circleSDF(st), 0.92, 0.02));

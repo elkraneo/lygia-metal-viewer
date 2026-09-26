@@ -11,7 +11,7 @@ using namespace metal;
 // Compare LYGIA's 3D noise functions, animated along z.
 // params: x = noise (0 snoise, 1 cnoise, 2 gnoise, 3 pnoise, 4 psrdnoise), y = scale, z = speed
 [[ stitchable ]] half4 noiseTypes(float2 position, half4 color, float2 size, float time, float4 params) {
-    float3 p = float3(lygiaST(position, size) * params.y, time * params.z);
+    float3 p = float3(lygiaST(position, size) * params.y, params.z);
     int kind = int(params.x + 0.5);
 
     float n;

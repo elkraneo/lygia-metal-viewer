@@ -14,7 +14,7 @@ using namespace metal;
 [[ stitchable ]] half4 truchetWeave(float2 position, half4 color, float2 size, float time, float4 params) {
     float2 st = lygiaST(position, size);
     float4 t = sqTile(st * params.x);
-    float flip = step(0.5, random(t.zw + floor(time * params.y)));
+    float flip = step(0.5, random(t.zw + floor(params.y)));
     float2 p = flip > 0.5 ? float2(1.0 - t.x, t.y) : t.xy;
 
     // Distance to the two corner arcs (radius 0.5 around opposite corners).

@@ -9,7 +9,7 @@ using namespace metal;
 // params: x = scale, y = speed, z = warp amount
 [[ stitchable ]] half4 fbmClouds(float2 position, half4 color, float2 size, float time, float4 params) {
     float2 st = lygiaST(position, size) * params.x;
-    float t = time * params.y;
+    float t = params.y;
 
     float2 q = float2(fbm(float3(st, t)),
                       fbm(float3(st + float2(5.2, 1.3), t)));

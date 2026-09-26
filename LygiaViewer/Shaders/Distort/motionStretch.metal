@@ -15,7 +15,7 @@ using namespace metal;
 [[ stitchable ]] half4 motionStretch(float2 position, SwiftUI::Layer layer, float2 size, float time, float4 params) {
     LayerTexture tex = { layer, size };
     float2 uv = lygiaUV(position, size);
-    float a = (params.y + time * params.z) * 6.2831853;
+    float a = (params.y + params.z) * 6.2831853;
     float2 dir = float2(cos(a), sin(a)) * params.x / float(STRETCH_SAMPLES);
     return half4(stretch(tex, uv - dir * float(STRETCH_SAMPLES) * 0.5, dir));
 }

@@ -48,11 +48,20 @@ struct DemoParam: Identifiable {
     let name: String
     let control: Control
     let defaultValue: Float
+    /// A speed slider: the shader gets the angle or offset accumulated at that
+    /// speed, not the speed itself (see `Demo.arguments`).
+    var isSpeed = false
 
     var id: String { name }
 
     static func slider(_ name: String, _ range: ClosedRange<Float>, _ value: Float, step: Float? = nil) -> DemoParam {
         DemoParam(name: name, control: .slider(range, step: step), defaultValue: value)
+    }
+
+    /// A speed slider (units per second). The shader receives the accumulated value,
+    /// so it uses `params.y` where it would otherwise use `time * params.y`.
+    static func speed(_ name: String, _ range: ClosedRange<Float>, _ value: Float) -> DemoParam {
+        DemoParam(name: name, control: .slider(range), defaultValue: value, isSpeed: true)
     }
 
     static func int(_ name: String, _ range: ClosedRange<Float>, _ value: Float) -> DemoParam {
@@ -88,5 +97,19 @@ struct Demo: Identifiable, Hashable {
         var v = SIMD4<Float>(repeating: 0)
         for (i, p) in params.prefix(4).enumerated() { v[i] = p.defaultValue }
         return v
+    }
+
+    /// The components of `params` that are speed sliders.
+    var speeds: SIMDMask<SIMD4<Int32>> {
+        var mask = SIMDMask<SIMD4<Int32>>(repeating: false)
+        for (i, p) in params.prefix(4).enumerated() { mask[i] = p.isSpeed }
+        return mask
+    }
+
+    /// The shader's `params` for slider values held constant since time 0: each
+    /// speed becomes speed * time. Used for snapshots and validation; the live
+    /// preview accumulates speeds frame by frame instead (`SpeedIntegrator`).
+    func arguments(_ values: SIMD4<Float>, time: Float) -> SIMD4<Float> {
+        values.replacing(with: values * time, where: speeds)
     }
 }

@@ -37,7 +37,7 @@ static inline Material raymarchMap(float3 p) {
 
 // params: x = orbit speed, y = camera distance, z = camera height, w = exposure
 [[ stitchable ]] half4 raymarchScene(float2 position, half4 color, float2 size, float time, float4 params) {
-    float a = time * params.x + 0.6;
+    float a = params.x + 0.6;
     float3 camera = float3(sin(a) * params.y, params.z, cos(a) * params.y);
     // space/lookAt flips the image 180 degrees (as in GLSL), so flip st back
     float2 st = 1.0 - lygiaST(position, size);

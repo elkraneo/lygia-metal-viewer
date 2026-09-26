@@ -10,7 +10,7 @@ using namespace metal;
 // params: x = zoom (r), y = speed, z = orbit radius
 [[ stitchable ]] half4 juliaSet(float2 position, half4 color, float2 size, float time, float4 params) {
     float2 st = lygiaST(position, size);
-    float a = time * params.y;
+    float a = params.y;
     float2 c = params.z * float2(cos(a), sin(a));
     float n = juliaSDF(st, c, params.x);
     float iterations = (1.0 - n) * 500.0;

@@ -9,7 +9,7 @@ using namespace metal;
 // params: x = scroll speed, y = repeats
 [[ stitchable ]] half4 spectralPalettes(float2 position, half4 color, float2 size, float time, float4 params) {
     float2 uv = lygiaUV(position, size);
-    float x = fract(uv.x * params.y + time * params.x);
+    float x = fract(uv.x * params.y + params.x);
     float row = (1.0 - uv.y) * 6.0;
     int band = min(int(row), 5);
     float3 c = band == 0 ? spectral(x)

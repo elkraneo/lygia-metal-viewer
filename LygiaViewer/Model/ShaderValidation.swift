@@ -42,7 +42,7 @@ enum ShaderSnapshots {
         let time = Float(defaults.object(forKey: "snapshotTime") as? Double ?? 2.0)
 
         for demo in DemoCatalog.all {
-            let view = ShaderSurface(demo: demo, values: demo.defaultValues, size: CGSize(width: 256, height: 256), time: time)
+            let view = ShaderSurface(demo: demo, arguments: demo.arguments(demo.defaultValues, time: time), size: CGSize(width: 256, height: 256), time: time)
                 .frame(width: 256, height: 256)
             write(view, to: dir.appendingPathComponent("\(demo.id).png"))
         }
@@ -100,7 +100,7 @@ enum ShaderSnapshots {
                     HStack(alignment: .top, spacing: 12) {
                         ForEach(rows[r]) { item in
                             VStack(alignment: .leading, spacing: 4) {
-                                ShaderSurface(demo: item.demo, values: item.values, size: CGSize(width: tile, height: tile), time: time)
+                                ShaderSurface(demo: item.demo, arguments: item.demo.arguments(item.values, time: time), size: CGSize(width: tile, height: tile), time: time)
                                     .frame(width: tile, height: tile)
                                     .clipShape(.rect(cornerRadius: 8))
                                 Text(item.label)

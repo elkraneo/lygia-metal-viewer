@@ -9,6 +9,10 @@
 //   layerEffect:      half4  name(float2 position, SwiftUI::Layer layer,  float2 size, float time, float4 params)
 //   distortionEffect: float2 name(float2 position,                        float2 size, float time, float4 params)
 //
+// A speed slider (`.speed` in DemoCatalog) arrives already accumulated: use
+// `params.y` where you would write `time * params.y`. The app adds speed * frame
+// time each frame, so moving the slider changes the rate without a jump.
+//
 // Include LYGIA directly. Its functions are `static inline`, so every .metal
 // file gets its own copy and the files link into one library.
 

@@ -12,7 +12,7 @@ using namespace metal;
 [[ stitchable ]] half4 hueShiftLayer(float2 position, SwiftUI::Layer layer, float2 size, float time, float4 params) {
     float4 c = float4(layer.sample(position));
     float3 rgb = c.a > 0.0 ? c.rgb / c.a : c.rgb;   // un-premultiply
-    float angle = fract(params.x + time * params.y) * TAU;
+    float angle = fract(params.x + params.y) * TAU;
     rgb = hueShift(rgb, angle);
     rgb = desaturate(rgb, params.z);
     return half4(half3(rgb * c.a), half(c.a));

@@ -18,12 +18,12 @@ using namespace metal;
 [[ stitchable ]] half4 mandala(float2 position, half4 color, float2 size, float time, float4 params) {
     float2 st = lygiaST(position, size);
     int n = int(params.x + 0.5);
-    float2 k = kaleidoscope(st, float(n), time * params.y);   // folded coordinates, center 0.5
+    float2 k = kaleidoscope(st, float(n), params.y);   // folded coordinates, center 0.5
     float w = params.z;
     float r = circleSDF(st);                                   // 0 center, 1 at radius 0.5
 
     float3 c = float3(0.04, 0.03, 0.07);
-    float3 hue = spectral(fract(r * 0.8 + time * params.w));
+    float3 hue = spectral(fract(r * 0.8 + params.w));
 
     c = mix(c, hue * 0.35, fill(gearSDF(st, 12.0, n), 0.0, 0.01));
     c = mix(c, hue, stroke(flowerSDF(st, n), 0.3, w));
