@@ -3,6 +3,7 @@ using namespace metal;
 #include "Common.h"
 
 #include "lygia/space/kaleidoscope.msl"
+#include "lygia/space/rotate.msl"
 #include "lygia/sdf/circleSDF.msl"
 #include "lygia/sdf/polySDF.msl"
 #include "lygia/sdf/gearSDF.msl"
@@ -16,9 +17,9 @@ using namespace metal;
 // placed once (off-center) repeat around the circle.
 // params: x = segments, y = rotation speed, z = line width, w = color shift speed
 [[ stitchable ]] half4 mandala(float2 position, half4 color, float2 size, float time, float4 params) {
-    float2 st = lygiaST(position, size);
+    float2 st = rotate(lygiaST(position, size), params.y);     // turns the whole mandala
     int n = int(params.x + 0.5);
-    float2 k = kaleidoscope(st, float(n), params.y);   // folded coordinates, center 0.5
+    float2 k = kaleidoscope(st, float(n));                     // folded coordinates, center 0.5
     float w = params.z;
     float r = circleSDF(st);                                   // 0 center, 1 at radius 0.5
 

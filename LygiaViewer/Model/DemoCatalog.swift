@@ -161,7 +161,7 @@ enum DemoCatalog {
              summary: "sqTile + rectSDF + rotate: the 8-point star from two squares, interlaced bands.",
              params: [.slider("Scale", 1...12, 3), .slider("Square size", 0.3...1, 0.62), .slider("Breathing", 0...1, 0.5), .slider("Line width", 0.02...0.2, 0.09)]),
         Demo(id: "mandala", title: "Mandala", module: .ornament,
-             summary: "kaleidoscope + circleSDF, vesicaSDF, polySDF, gearSDF, flowerSDF and spectral color.",
+             summary: "rotate + kaleidoscope + circleSDF, vesicaSDF, polySDF, gearSDF, flowerSDF and spectral color.",
              params: [.int("Segments", 3...24, 12), .speed("Rotation", -1...1, 0.1), .slider("Line width", 0.005...0.05, 0.015), .speed("Color speed", 0...0.5, 0.05)]),
         Demo(id: "truchetWeave", title: "Truchet weave", module: .ornament,
              summary: "sqTile + random: Smith truchet arcs weaving continuous paths.",
