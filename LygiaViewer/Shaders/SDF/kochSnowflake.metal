@@ -2,11 +2,9 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/sdf/kochSDF.msl"
 #include "lygia/space/rotate.msl"
 #include "lygia/draw/stroke.msl"
-}
 
 // kochSDF(st, iterations) is a true signed distance: negative inside.
 // params: x = iterations, y = rotation speed, z = band density

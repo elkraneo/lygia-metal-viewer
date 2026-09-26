@@ -2,10 +2,8 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/space/kaleidoscope.msl"
 #include "lygia/generative/fbm.msl"
-}
 
 // kaleidoscope(st, segments, phase) folds polar space into mirrored wedges.
 // params: x = segments, y = phase speed, z = noise scale

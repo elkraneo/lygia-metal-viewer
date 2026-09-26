@@ -2,9 +2,7 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/distort/barrel.msl"
-}
 
 // distortionEffect: returns, for each destination pixel, where to sample the
 // SwiftUI view. barrel(uv, amount) pushes uvs away from (or toward) the center.

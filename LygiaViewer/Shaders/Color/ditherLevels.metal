@@ -2,13 +2,11 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/color/dither/bayer.msl"
 #include "lygia/color/dither/interleavedGradientNoise.msl"
 #include "lygia/color/dither/triangleNoise.msl"
 #include "lygia/color/dither/vlachos.msl"
 #include "lygia/color/dither/shift.msl"
-}
 
 // A smooth gradient quantized to N levels per channel. Dithering trades the
 // banding for noise. Pixel coordinates are passed explicitly (no gl_FragCoord in Metal).

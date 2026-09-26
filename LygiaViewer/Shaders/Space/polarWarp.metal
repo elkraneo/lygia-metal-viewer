@@ -2,13 +2,11 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/space/cart2polar.msl"
 #include "lygia/space/rotate.msl"
 #include "lygia/space/scale.msl"
 #include "lygia/space/checkerTile.msl"
 #include "lygia/math/const.msl"
-}
 
 // cart2polar turns (x, y) into (angle, radius); a checkerboard in that space
 // becomes a polar grid. rotate/scale transform st first.

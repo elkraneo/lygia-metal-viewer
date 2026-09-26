@@ -2,9 +2,7 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/sdf/juliaSDF.msl"
-}
 
 // juliaSDF returns i / 500 where i counts down from 500 when z escapes:
 // ~1 = escaped immediately, 0 = never escaped (inside the set).

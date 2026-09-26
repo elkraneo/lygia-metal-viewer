@@ -2,11 +2,9 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/space/triTile.msl"
 #include "lygia/generative/random.msl"
 #include "lygia/draw/stroke.msl"
-}
 
 // triTile() splits the plane into equilateral triangles.
 // xy = barycentric-like local coords, zw = triangle id (sign = up/down).

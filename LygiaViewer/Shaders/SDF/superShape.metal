@@ -2,11 +2,9 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/sdf/superShapeSDF.msl"
 #include "lygia/draw/fill.msl"
 #include "lygia/draw/stroke.msl"
-}
 
 // Gielis superformula. m = symmetry, n1..n3 = exponents.
 // params: x = m, y = n1, z = n2, w = n3

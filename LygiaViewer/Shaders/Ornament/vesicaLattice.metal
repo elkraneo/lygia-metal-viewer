@@ -2,7 +2,6 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/space/mirrorTile.msl"
 #include "lygia/space/rotate.msl"
 #include "lygia/sdf/vesicaSDF.msl"
@@ -11,7 +10,6 @@ namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/draw/stroke.msl"
 #include "lygia/draw/fill.msl"
 #include "lygia/math/const.msl"
-}
 
 // Ornament: vesica piscis (two overlapping circles) crossed at 90 degrees,
 // mirrored across tiles so arcs join into a continuous quatrefoil lattice.

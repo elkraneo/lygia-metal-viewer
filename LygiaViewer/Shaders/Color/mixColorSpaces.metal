@@ -2,11 +2,9 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/color/mixOklab.msl"
 #include "lygia/color/mixSpectral.msl"
 #include "lygia/color/mixRYB.msl"
-}
 
 static float3 pairColor(int pair, bool second) {
     switch (pair) {

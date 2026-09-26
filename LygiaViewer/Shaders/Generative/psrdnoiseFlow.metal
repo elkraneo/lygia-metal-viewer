@@ -2,9 +2,7 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/generative/psrdnoise.msl"
-}
 
 // psrdnoise (Gustavson & McEwan): tiling simplex noise with rotating
 // gradients (alpha) and an analytic gradient output, used here for shading.

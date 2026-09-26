@@ -2,9 +2,7 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/distort/pincushion.msl"
-}
 
 // pincushion(st, resolution, amount) expects st = fragCoord / resolution.x
 // (y scaled by the aspect ratio) and returns a 0..1 uv.

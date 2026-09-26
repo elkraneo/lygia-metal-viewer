@@ -2,7 +2,6 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/space/windmillTile.msl"
 #include "lygia/sdf/triSDF.msl"
 #include "lygia/sdf/rhombSDF.msl"
@@ -10,7 +9,6 @@ namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/draw/stroke.msl"
 #include "lygia/draw/fill.msl"
 #include "lygia/math/const.msl"
-}
 
 // Ornament: windmillTile rotates each tile of a 2x2 block by 0/90/180/270
 // degrees, turning one asymmetric motif into a pinwheel pattern.

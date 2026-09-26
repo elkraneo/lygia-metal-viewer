@@ -2,9 +2,7 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/generative/voronoise.msl"
-}
 
 // voronoise(p, u, v): u = cell jitter (0 grid, 1 voronoi), v = smoothness (0 cells, 1 noise).
 // params: x = scale, y = u (jitter), z = v (smoothness)

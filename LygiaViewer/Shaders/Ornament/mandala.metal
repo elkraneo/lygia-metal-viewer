@@ -2,7 +2,6 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/space/kaleidoscope.msl"
 #include "lygia/sdf/circleSDF.msl"
 #include "lygia/sdf/polySDF.msl"
@@ -12,7 +11,6 @@ namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/draw/stroke.msl"
 #include "lygia/draw/fill.msl"
 #include "lygia/color/palette/spectral.msl"
-}
 
 // Ornament: kaleidoscope() folds the plane into N mirrored wedges, so shapes
 // placed once (off-center) repeat around the circle.

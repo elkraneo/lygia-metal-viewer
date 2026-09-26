@@ -2,9 +2,7 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/generative/voronoi.msl"
-}
 
 // voronoi() returns float3(cell point xy, distance to it). The point is
 // unique per cell, so it doubles as a cell id for coloring.

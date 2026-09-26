@@ -2,9 +2,7 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/generative/fbm.msl"
-}
 
 // Domain-warped fractal Brownian motion (Inigo Quilez style):
 // fbm(p + warp * fbm(p)).

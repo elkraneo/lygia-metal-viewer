@@ -2,7 +2,6 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/space/hexTile.msl"
 #include "lygia/space/rotate.msl"
 #include "lygia/sdf/flowerSDF.msl"
@@ -12,7 +11,6 @@ namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/draw/stroke.msl"
 #include "lygia/draw/fill.msl"
 #include "lygia/math/const.msl"
-}
 
 // Ornament: a six-petal rosette in every hexagon, counter-rotating per ring.
 // hexTile -> flowerSDF / starSDF / hexSDF -> stroke.

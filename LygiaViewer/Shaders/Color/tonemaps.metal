@@ -2,7 +2,6 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/color/tonemap/linear.msl"
 #include "lygia/color/tonemap/reinhard.msl"
 #include "lygia/color/tonemap/reinhardJodie.msl"
@@ -11,7 +10,6 @@ namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/color/tonemap/uncharted2.msl"
 #include "lygia/color/tonemap/unreal.msl"
 #include "lygia/color/space/hsv2rgb.msl"
-}
 
 // HDR ramp (x: 0..exposure stops of light, per-row hue) pushed through
 // seven tonemappers, top to bottom: linear (clipped), Reinhard,

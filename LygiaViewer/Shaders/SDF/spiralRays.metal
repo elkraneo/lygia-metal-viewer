@@ -2,14 +2,12 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/sdf/spiralSDF.msl"
 #include "lygia/sdf/raysSDF.msl"
 #include "lygia/sdf/circleSDF.msl"
 #include "lygia/space/rotate.msl"
 #include "lygia/draw/stroke.msl"
 #include "lygia/draw/fill.msl"
-}
 
 // spiralSDF and raysSDF XOR-ed together, like a PixelSpirit card.
 // params: x = spiral turns, y = rays, z = rotation speed

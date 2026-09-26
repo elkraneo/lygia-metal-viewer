@@ -2,12 +2,10 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/space/sqTile.msl"
 #include "lygia/space/checkerTile.msl"
 #include "lygia/generative/random.msl"
 #include "lygia/draw/stroke.msl"
-}
 
 // Ornament: Smith truchet tiles. Each tile randomly picks one of two
 // orientations of two quarter-circle arcs; together they weave endless paths.

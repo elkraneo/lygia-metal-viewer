@@ -2,7 +2,6 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/sdf/circleSDF.msl"
 #include "lygia/sdf/rectSDF.msl"
 #include "lygia/sdf/opUnion.msl"
@@ -10,7 +9,6 @@ namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/sdf/opIntersection.msl"
 #include "lygia/sdf/opOnion.msl"
 #include "lygia/draw/stroke.msl"
-}
 
 // Smooth boolean operators on two shapes. The fields are shifted so 0 is the
 // silhouette (circleSDF is 2 * length, rectSDF is a box norm).

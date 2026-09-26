@@ -2,9 +2,7 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/generative/worley.msl"
-}
 
 // worley() returns 1 - distance to the closest feature point.
 // params: x = scale, y = speed, z = invert (0/1), w = sharpness

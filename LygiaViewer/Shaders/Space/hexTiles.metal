@@ -2,13 +2,11 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/space/hexTile.msl"
 #include "lygia/sdf/hexSDF.msl"
 #include "lygia/generative/random.msl"
 #include "lygia/draw/stroke.msl"
 #include "lygia/draw/fill.msl"
-}
 
 // hexTile() returns float4(local uv with the hex centered at 0.5, hex id).
 // params: x = scale, y = ripple speed, z = line width

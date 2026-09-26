@@ -2,13 +2,11 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/generative/snoise.msl"
 #include "lygia/generative/cnoise.msl"
 #include "lygia/generative/gnoise.msl"
 #include "lygia/generative/pnoise.msl"
 #include "lygia/generative/psrdnoise.msl"
-}
 
 // Compare LYGIA's 3D noise functions, animated along z.
 // params: x = noise (0 snoise, 1 cnoise, 2 gnoise, 3 pnoise, 4 psrdnoise), y = scale, z = speed

@@ -2,7 +2,6 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/space/sqTile.msl"
 #include "lygia/space/mirrorTile.msl"
 #include "lygia/space/brickTile.msl"
@@ -12,7 +11,6 @@ namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/sdf/triSDF.msl"
 #include "lygia/draw/stroke.msl"
 #include "lygia/draw/fill.msl"
-}
 
 // Square tilings. Every *Tile returns float4(local uv 0..1, tile id).
 // A triangle drawn in each tile shows how the local space is flipped/rotated.

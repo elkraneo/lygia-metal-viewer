@@ -6,9 +6,7 @@ using namespace metal;
 #define SAMPLER_TYPE LayerTexture
 #define SAMPLER_FNC(TEX, UV) TEX.sampleUV(UV)
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/distort/chromaAB.msl"
-}
 
 // chromaAB(tex, st, direction, distortion): samples R, G and B at
 // st + direction * distortion.rgb. Direction points away from the center.

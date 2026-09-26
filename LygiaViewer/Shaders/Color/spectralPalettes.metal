@@ -2,9 +2,7 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/color/palette/spectral.msl"
-}
 
 // The spectral palette family (visible spectrum approximations), top to bottom:
 // spectral(x), spectral_gems, spectral_geoffrey, spectral_soft, spectral_zucconi, spectral_zucconi6.

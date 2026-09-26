@@ -9,10 +9,8 @@
 //   layerEffect:      half4  name(float2 position, SwiftUI::Layer layer,  float2 size, float time, float4 params)
 //   distortionEffect: float2 name(float2 position,                        float2 size, float time, float4 params)
 //
-// Older demos wrap LYGIA includes in `namespace { ... }` (LYGIA_BEGIN /
-// LYGIA_END). That was needed when LYGIA's .msl functions were plain
-// definitions, which fail to link from two .metal files. They're now
-// `static inline`, so new demos can include LYGIA directly.
+// Include LYGIA directly. Its functions are `static inline`, so every .metal
+// file gets its own copy and the files link into one library.
 
 #pragma once
 
@@ -26,9 +24,6 @@ using namespace metal;
 #ifndef AA_EDGE
 #define AA_EDGE 0.004
 #endif
-
-#define LYGIA_BEGIN namespace {
-#define LYGIA_END }
 
 namespace {
 
@@ -72,9 +67,7 @@ inline float3 cosPalette(float t, float3 a, float3 b, float3 c, float3 d) {
 //
 //   #define SAMPLER_TYPE LayerTexture
 //   #define SAMPLER_FNC(TEX, UV) TEX.sampleUV(UV)
-//   LYGIA_BEGIN
 //   #include "lygia/distort/chromaAB.msl"
-//   LYGIA_END
 struct LayerTexture {
     SwiftUI::Layer layer;
     float2 size;

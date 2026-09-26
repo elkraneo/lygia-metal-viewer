@@ -46,7 +46,7 @@ LYGIA_SOURCE_ROOT = /path/to/folder/containing/lygia
 
 ## LYGIA
 
-`External/lygia` tracks the `metal/lighting` branch of [elkraneo/lygia](https://github.com/elkraneo/lygia). It includes Metal fixes and ports not yet in upstream LYGIA, so some demos don't build against upstream `main`.
+`External/lygia` tracks the `metal/lighting` branch of [elkraneo/lygia](https://github.com/elkraneo/lygia). It includes Metal fixes and ports not yet in upstream LYGIA, so some demos don't build against upstream `main`. Each fix is checked on the GPU against GLSL and upstream `main`: see [the results](https://github.com/elkraneo/lygia/blob/metal/lighting/test/msl/proof/RESULTS.md). The demos include LYGIA directly in about 40 `.metal` files that link into one library.
 
 ## Adding a demo
 

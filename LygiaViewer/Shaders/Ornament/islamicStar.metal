@@ -2,7 +2,6 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/space/sqTile.msl"
 #include "lygia/space/rotate.msl"
 #include "lygia/sdf/rectSDF.msl"
@@ -11,7 +10,6 @@ namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/draw/stroke.msl"
 #include "lygia/draw/fill.msl"
 #include "lygia/math/const.msl"
-}
 
 // Two-band interlaced line: outer stroke minus a thinner inner stroke.
 static float band(float d, float at, float w) {

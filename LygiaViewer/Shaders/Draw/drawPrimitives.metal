@@ -2,14 +2,12 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/draw/circle.msl"
 #include "lygia/draw/rect.msl"
 #include "lygia/draw/hex.msl"
 #include "lygia/draw/tri.msl"
 #include "lygia/space/sqTile.msl"
 #include "lygia/space/rotate.msl"
-}
 
 // draw/* wraps an SDF with fill() or stroke():
 //   circle(st, size) fills, circle(st, size, width) strokes. Same for rect, hex, tri.

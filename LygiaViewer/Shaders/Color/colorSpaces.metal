@@ -2,7 +2,6 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/color/space/oklab2rgb.msl"
 #include "lygia/color/space/rgb2srgb.msl"
 #include "lygia/color/space/hsv2rgb.msl"
@@ -10,7 +9,6 @@ namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/color/space/k2rgb.msl"
 #include "lygia/space/cart2polar.msl"
 #include "lygia/math/const.msl"
-}
 
 // Conversions from color/space/*:
 //   0 Oklab a/b plane at lightness L (oklab2rgb + rgb2srgb)

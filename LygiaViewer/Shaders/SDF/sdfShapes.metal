@@ -2,7 +2,6 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/sdf/circleSDF.msl"
 #include "lygia/sdf/rectSDF.msl"
 #include "lygia/sdf/starSDF.msl"
@@ -17,7 +16,6 @@ namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/sdf/crossSDF.msl"
 #include "lygia/draw/fill.msl"
 #include "lygia/draw/stroke.msl"
-}
 
 static float shapeSDF(int shape, float2 st, int n) {
     switch (shape) {

@@ -7,9 +7,7 @@ using namespace metal;
 #define SAMPLER_FNC(TEX, UV) TEX.sampleUV(UV)
 #define STRETCH_SAMPLES 24
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/distort/stretch.msl"
-}
 
 // stretch(tex, st, direction) averages STRETCH_SAMPLES samples along a
 // direction: a directional / motion blur.

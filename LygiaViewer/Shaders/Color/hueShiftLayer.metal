@@ -2,11 +2,9 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/color/hueShift.msl"
 #include "lygia/color/desaturate.msl"
 #include "lygia/math/const.msl"
-}
 
 // layerEffect: recolors the SwiftUI view underneath (sample content).
 // hueShift(color, radians) rotates the hue in HSL.

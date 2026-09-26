@@ -2,9 +2,7 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/generative/random.msl"
-}
 
 // LYGIA's hash-based random: random (float), random2, random3.
 // params: x = mode (0 white noise, 1 random per cell, 2 random3 per cell), y = cells, z = reseed speed

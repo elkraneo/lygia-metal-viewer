@@ -6,9 +6,7 @@ using namespace metal;
 #define SAMPLER_TYPE LayerTexture
 #define SAMPLER_FNC(TEX, UV) TEX.sampleUV(UV)
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/distort/grain.msl"
-}
 
 // grain(tex, st, resolution, time, size): film grain from 3D noise, blended
 // with soft light and reduced on bright areas.

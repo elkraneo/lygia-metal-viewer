@@ -2,7 +2,6 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/color/blend/multiply.msl"
 #include "lygia/color/blend/screen.msl"
 #include "lygia/color/blend/overlay.msl"
@@ -18,7 +17,6 @@ namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/color/blend/luminosity.msl"
 #include "lygia/color/space/hsv2rgb.msl"
 #include "lygia/sdf/circleSDF.msl"
-}
 
 static float3 blendMode(int mode, float3 base, float3 blend, float opacity) {
     switch (mode) {

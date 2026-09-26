@@ -2,10 +2,8 @@
 using namespace metal;
 #include "Common.h"
 
-namespace { // LYGIA: internal linkage, see Common.h
 #include "lygia/generative/curl.msl"
 #include "lygia/generative/snoise.msl"
-}
 
 // Curl noise is divergence free: a good velocity field for fluid-like motion.
 // Here the field is shown as color plus streaks along the flow.
