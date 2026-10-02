@@ -36,7 +36,7 @@ xcodegen generate
 open LygiaViewer.xcodeproj
 ```
 
-Builds are signed ad-hoc. For a device, or to use another LYGIA checkout, create `Config/Local.xcconfig` (git-ignored):
+Builds are signed ad-hoc. For a device, or to compile the demos against another LYGIA checkout, create `Config/Local.xcconfig` (git-ignored):
 
 ```
 VIEWER_CODE_SIGN_STYLE = Automatic
@@ -49,7 +49,9 @@ LYGIA_SOURCE_ROOT = /path/to/folder/containing/lygia
 
 ## LYGIA
 
-`External/lygia` tracks the `metal/lighting` branch of [elkraneo/lygia](https://github.com/elkraneo/lygia). It includes Metal fixes and ports not yet in upstream LYGIA, so some demos don't build against upstream `main`. Each fix is checked on the GPU against GLSL and upstream `main`: see [the results](https://github.com/elkraneo/lygia/blob/metal/lighting/test/msl/proof/RESULTS.md). The demos include LYGIA directly in about 40 `.metal` files that link into one library.
+`External/lygia` tracks the `metal/lighting` branch of [elkraneo/lygia](https://github.com/elkraneo/lygia), used as a Swift package (`Lygia`). It includes Metal fixes and ports not yet in upstream LYGIA, so some demos don't build against upstream `main`. Each fix is checked on the GPU against GLSL and upstream `main`: see [the results](https://github.com/elkraneo/lygia/blob/metal/lighting/test/msl/proof/RESULTS.md).
+
+The app uses the package both ways its [README](https://github.com/elkraneo/lygia/blob/metal/lighting/swift/README.md) describes: the 40 demo `.metal` files include LYGIA from the package's resource bundle through `MTL_HEADER_SEARCH_PATHS` (`Config/Viewer.xcconfig`) and link into one library, and the Playground and Compare views compile snippets at runtime with `Lygia.flatten`.
 
 The Compare view needs upstream `main` next to the fork. The build exports it from the submodule into `External/upstream/` (git-ignored), adding an `upstream` remote to `External/lygia` the first time; offline, it keeps the last export.
 

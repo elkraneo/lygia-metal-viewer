@@ -1,4 +1,5 @@
 #if os(macOS)
+import Lygia
 import Metal
 import SwiftUI
 
@@ -104,6 +105,12 @@ final class CompareRenderer {
 
     // MARK: - Metal
 
+    struct RenderFailure: LocalizedError {
+        let message: String
+        init(_ message: String) { self.message = message }
+        var errorDescription: String? { message }
+    }
+
     static let postlude = """
     struct CompareVertexOut { float4 position [[position]]; };
     struct CompareUniforms { float2 resolution; float time; float pad; };
@@ -134,7 +141,7 @@ final class CompareRenderer {
         textureDescriptor.usage = [.renderTarget]
         textureDescriptor.storageMode = .shared
         guard let texture = device.makeTexture(descriptor: textureDescriptor) else {
-            throw IncludeFlattener.Failure(message: "Couldn't create the render target")
+            throw RenderFailure( "Couldn't create the render target")
         }
         let pass = MTLRenderPassDescriptor()
         pass.colorAttachments[0].texture = texture
@@ -143,7 +150,7 @@ final class CompareRenderer {
         pass.colorAttachments[0].clearColor = MTLClearColor(red: 0, green: 0, blue: 0, alpha: 1)
 
         guard let commands = queue.makeCommandBuffer(), let encoder = commands.makeRenderCommandEncoder(descriptor: pass) else {
-            throw IncludeFlattener.Failure(message: "Couldn't encode the render pass")
+            throw RenderFailure( "Couldn't encode the render pass")
         }
         var uniforms = (SIMD2<Float>(Float(size), Float(size)), time, Float(0))
         encoder.setRenderPipelineState(pipeline)

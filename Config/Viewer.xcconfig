@@ -1,5 +1,11 @@
-// Folder that contains `lygia/`. Defaults to the External/lygia submodule.
-LYGIA_SOURCE_ROOT = $(SRCROOT)/External
+// The demo shaders include LYGIA from the Lygia package's resource bundle. The
+// bundle layout differs per platform (see External/lygia/swift/README.md).
+LYGIA_BUNDLE_HEADERS[sdk=macosx*] = $(BUILT_PRODUCTS_DIR)/Lygia_Lygia.bundle/Contents/Resources
+LYGIA_BUNDLE_HEADERS = $(BUILT_PRODUCTS_DIR)/Lygia_Lygia.bundle
+
+// Optional folder that contains `lygia/`, searched before the bundle. Empty by
+// default; Config/Local.xcconfig can point it at another checkout.
+LYGIA_SOURCE_ROOT =
 
 // Folder where the build exports upstream LYGIA main (git-ignored), for the Compare view.
 LYGIA_UPSTREAM_ROOT = $(SRCROOT)/External/upstream

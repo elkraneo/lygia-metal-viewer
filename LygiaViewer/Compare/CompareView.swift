@@ -1,5 +1,6 @@
 #if os(macOS)
 import AppKit
+import Lygia
 import SwiftUI
 
 /// Renders one snippet with upstream LYGIA and with this fork, side by side,
@@ -155,13 +156,12 @@ struct CompareView: View {
     }
 }
 
-/// Where the two LYGIA checkouts live. The fork is the one the demos are
-/// built with; upstream main is exported next to it at build time.
+/// Where the two LYGIA checkouts live. The fork comes from the Lygia package's
+/// bundle (what the demos are built with); upstream main is exported at build time.
 enum LygiaRoots {
     static func fork(override: String) -> URL {
         if !override.isEmpty { return URL(fileURLWithPath: override) }
-        let baked = Bundle.main.object(forInfoDictionaryKey: "LygiaSourceRoot") as? String ?? ""
-        return URL(fileURLWithPath: baked).standardizedFileURL
+        return Lygia.includePath
     }
 
     static var upstream: URL {

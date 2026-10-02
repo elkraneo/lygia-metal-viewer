@@ -1,5 +1,6 @@
 #if os(macOS)
 import AppKit
+import Lygia
 import SwiftUI
 
 /// Type MSL with LYGIA includes, see it render live.
@@ -13,11 +14,7 @@ struct PlaygroundView: View {
     /// The example the editor started from; nil once the text is edited.
     private var loadedExample: PlaygroundExample? { PlaygroundExamples.all.first { $0.source == source } }
 
-    private var lygiaRoot: URL {
-        if !lygiaRootOverride.isEmpty { return URL(fileURLWithPath: lygiaRootOverride) }
-        let baked = Bundle.main.object(forInfoDictionaryKey: "LygiaSourceRoot") as? String ?? ""
-        return URL(fileURLWithPath: baked).standardizedFileURL
-    }
+    private var lygiaRoot: URL { LygiaRoots.fork(override: lygiaRootOverride) }
 
     var body: some View {
         HSplitView {

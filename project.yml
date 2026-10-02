@@ -15,6 +15,11 @@ settings:
     MARKETING_VERSION: "0.1"
     CURRENT_PROJECT_VERSION: "1"
 
+packages:
+  # The LYGIA fork, as a Swift package (its .msl files as a resource bundle).
+  Lygia:
+    path: External/lygia
+
 targets:
   LygiaViewer:
     type: application
@@ -25,6 +30,8 @@ targets:
       - path: LygiaViewer
         excludes:
           - "Resources/Info.plist"
+    dependencies:
+      - package: Lygia
     configFiles:
       Debug: Config/Viewer.xcconfig
       Release: Config/Viewer.xcconfig
@@ -50,9 +57,10 @@ targets:
         "INFOPLIST_KEY_UIApplicationSupportsMultipleScenes[sdk=xr*]": YES
         TARGETED_DEVICE_FAMILY: "1,2,7"
 
-        # LYGIA_SOURCE_ROOT (the folder that contains `lygia/`) comes from
-        # Config/Viewer.xcconfig. .metal files use `#include "lygia/sdf/starSDF.msl"`.
-        MTL_HEADER_SEARCH_PATHS: $(LYGIA_SOURCE_ROOT) $(SRCROOT)/LygiaViewer/Shaders
+        # The demo .metal files `#include "lygia/sdf/starSDF.msl"` from the Lygia
+        # package's resource bundle (the recipe in External/lygia/swift/README.md);
+        # Config/Local.xcconfig can put another checkout first (LYGIA_SOURCE_ROOT).
+        MTL_HEADER_SEARCH_PATHS: $(LYGIA_SOURCE_ROOT) $(LYGIA_BUNDLE_HEADERS) $(SRCROOT)/LygiaViewer/Shaders
         # LYGIA headers define many overloads; each demo only uses a few.
         MTL_COMPILER_FLAGS: -Wno-unused-function
 

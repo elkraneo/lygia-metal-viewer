@@ -1,4 +1,5 @@
 #if os(macOS)
+import Lygia
 import SwiftUI
 
 struct SettingsView: View {
@@ -15,7 +16,7 @@ struct SettingsView: View {
             }
             Section("LYGIA") {
                 LabeledContent("Folder") {
-                    Text(lygiaRootOverride.isEmpty ? "Built-in (External/lygia)" : (lygiaRootOverride as NSString).abbreviatingWithTildeInPath)
+                    Text(lygiaRootOverride.isEmpty ? "Lygia package (\(Lygia.version ?? "bundled"))" : (lygiaRootOverride as NSString).abbreviatingWithTildeInPath)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                         .truncationMode(.middle)

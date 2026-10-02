@@ -1,4 +1,5 @@
 #if os(macOS)
+import Lygia
 import MetalKit
 import SwiftUI
 
