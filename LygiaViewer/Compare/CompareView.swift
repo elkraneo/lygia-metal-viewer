@@ -22,6 +22,22 @@ struct CompareView: View {
     var body: some View {
         HSplitView {
             VStack(spacing: 0) {
+                HStack {
+                    Menu {
+                        ForEach(CompareCases.all) { c in
+                            Button(c.title) { caseID = c.id; source = c.source }
+                        }
+                    } label: {
+                        Label(current.map { $0.source == source ? $0.title : "\($0.title) (edited)" } ?? "Edited snippet", systemImage: "text.document")
+                    }
+                    .menuStyle(.borderlessButton)
+                    .fixedSize()
+                    Spacer()
+                }
+                .font(.callout)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 6)
+                Divider()
                 CodeEditor(text: $source)
                     .frame(minWidth: 320, idealWidth: 420, maxWidth: 560)
                 Divider()
@@ -57,11 +73,6 @@ struct CompareView: View {
         .navigationTitle("Compare")
         .toolbar {
             ToolbarItemGroup {
-                Menu("Cases") {
-                    ForEach(CompareCases.all) { c in
-                        Button(c.title) { caseID = c.id; source = c.source }
-                    }
-                }
                 Button("Copy Report", systemImage: "doc.on.clipboard") { copyReport() }
                     .disabled(renderer.difference == nil)
             }

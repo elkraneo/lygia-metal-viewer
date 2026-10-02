@@ -10,6 +10,8 @@ struct PlaygroundView: View {
     @AppStorage("lygiaRoot") private var lygiaRootOverride = ""
     @State private var renderer = PlaygroundRenderer()
     @State private var showFlattened = false
+    /// The example the editor started from; nil once the text is edited.
+    private var loadedExample: PlaygroundExample? { PlaygroundExamples.all.first { $0.source == source } }
 
     private var lygiaRoot: URL {
         if !lygiaRootOverride.isEmpty { return URL(fileURLWithPath: lygiaRootOverride) }
@@ -20,6 +22,8 @@ struct PlaygroundView: View {
     var body: some View {
         HSplitView {
             VStack(spacing: 0) {
+                editorBar
+                Divider()
                 CodeEditor(text: $source)
                     .frame(minWidth: 380)
                 Divider()
@@ -31,11 +35,6 @@ struct PlaygroundView: View {
         .navigationTitle("Playground")
         .toolbar {
             ToolbarItemGroup {
-                Menu("Examples") {
-                    ForEach(PlaygroundExamples.all) { example in
-                        Button(example.name) { source = example.source }
-                    }
-                }
                 Button(renderer.paused ? "Play" : "Pause", systemImage: renderer.paused ? "play.fill" : "pause.fill") {
                     renderer.togglePause()
                 }
@@ -72,6 +71,28 @@ struct PlaygroundView: View {
             .padding()
             .frame(minWidth: 700, minHeight: 500)
         }
+    }
+
+    /// Sits on the editor it changes: pick an example, or reset the edited one.
+    private var editorBar: some View {
+        HStack {
+            Menu {
+                ForEach(PlaygroundExamples.all) { example in
+                    Button(example.name) { source = example.source }
+                }
+            } label: {
+                Label(loadedExample?.name ?? "Edited snippet", systemImage: "text.document")
+            }
+            .menuStyle(.borderlessButton)
+            .fixedSize()
+            Spacer()
+            Text("mainImage(fragCoord, resolution, time)")
+                .font(.caption.monospaced())
+                .foregroundStyle(.tertiary)
+        }
+        .font(.callout)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
     }
 
     @ViewBuilder
