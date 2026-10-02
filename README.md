@@ -6,6 +6,7 @@ A SwiftUI app for browsing the Metal port of the [LYGIA shader library](https://
 
 - **40 live demos:** noise, SDFs, tiling, color, distortion, lighting (`pbr`, `raymarch`) and geometric ornaments, each with controls and its source.
 - **Playground (macOS):** write Metal with `#include "lygia/..."` and see it render as you type.
+- **Compare with upstream (macOS):** render a snippet with upstream LYGIA `main` and with this fork side by side, with a per-pixel difference. Built-in cases show each Metal fix (rotation direction, Bayer dither, `worley2`, `round`, lighting); the snippet is editable.
 - **Immersive (visionOS):** a raymarched LYGIA scene drawn by the app's own Metal renderer through Compositor Services ([details](docs/immersive.md)).
 
 | All demos | Playground |
@@ -15,6 +16,8 @@ A SwiftUI app for browsing the Metal port of the [LYGIA shader library](https://
 | iPhone | Vision Pro (immersive, simulator) |
 |---|---|
 | <img src="docs/iphone.png" alt="Khatam stars on iPhone" width="240"> | <img src="docs/immersive.png" alt="Immersive scene in the visionOS simulator" width="560"> |
+
+![Compare: rotation direction upstream vs. fork](docs/compare.png)
 
 <details><summary>All 40 demos</summary>
 
@@ -47,6 +50,8 @@ LYGIA_SOURCE_ROOT = /path/to/folder/containing/lygia
 ## LYGIA
 
 `External/lygia` tracks the `metal/lighting` branch of [elkraneo/lygia](https://github.com/elkraneo/lygia). It includes Metal fixes and ports not yet in upstream LYGIA, so some demos don't build against upstream `main`. Each fix is checked on the GPU against GLSL and upstream `main`: see [the results](https://github.com/elkraneo/lygia/blob/metal/lighting/test/msl/proof/RESULTS.md). The demos include LYGIA directly in about 40 `.metal` files that link into one library.
+
+The Compare view needs upstream `main` next to the fork. The build exports it from the submodule into `External/upstream/` (git-ignored), adding an `upstream` remote to `External/lygia` the first time; offline, it keeps the last export.
 
 ## Adding a demo
 

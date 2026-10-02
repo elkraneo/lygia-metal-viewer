@@ -1,6 +1,9 @@
 // Folder that contains `lygia/`. Defaults to the External/lygia submodule.
 LYGIA_SOURCE_ROOT = $(SRCROOT)/External
 
+// Folder where the build exports upstream LYGIA main (git-ignored), for the Compare view.
+LYGIA_UPSTREAM_ROOT = $(SRCROOT)/External/upstream
+
 // Ad-hoc "Sign to Run Locally", so macOS and simulator builds need no team.
 VIEWER_CODE_SIGN_STYLE = Manual
 VIEWER_CODE_SIGN_IDENTITY = -

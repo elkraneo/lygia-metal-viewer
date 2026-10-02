@@ -104,7 +104,7 @@ final class PlaygroundRenderer: NSObject {
         }
     }
 
-    private nonisolated static func cleanMessage(_ error: Error) -> String {
+    nonisolated static func cleanMessage(_ error: Error) -> String {
         let text = (error as NSError).localizedDescription
         // Keep diagnostics, drop the "Compilation failed:" wrapper noise.
         return text.replacingOccurrences(of: "Compilation failed: \n\n", with: "")

@@ -63,6 +63,22 @@ targets:
       configs:
         Debug:
           SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+    preBuildScripts:
+      - name: Export upstream LYGIA main (for the Compare view)
+        basedOnDependencyAnalysis: false
+        # Export upstream main's .msl files from the submodule (adding an
+        # `upstream` remote if needed), so the app can compile snippets against
+        # them without git at runtime. Offline, an older export is kept.
+        script: |
+          SUB="${SRCROOT}/External/lygia"
+          DEST="${LYGIA_UPSTREAM_ROOT}/lygia"
+          git -C "$SUB" remote get-url upstream >/dev/null 2>&1 || git -C "$SUB" remote add upstream https://github.com/patriciogonzalezvivo/lygia.git
+          git -C "$SUB" fetch -q upstream main 2>/dev/null || true
+          REF=$(git -C "$SUB" rev-parse upstream/main 2>/dev/null) || { echo "warning: upstream/main not available in $SUB; Compare will show upstream as missing"; exit 0; }
+          if [ "$(cat "$DEST/.exported" 2>/dev/null)" = "$REF" ]; then exit 0; fi
+          rm -rf "$DEST" && mkdir -p "$DEST"
+          git -C "$SUB" archive "$REF" -- ':(glob)**/*.msl' | tar -x -C "$DEST"
+          echo "$REF" > "$DEST/.exported"
     postBuildScripts:
       - name: Copy shader sources (for the in-app source view)
         basedOnDependencyAnalysis: false

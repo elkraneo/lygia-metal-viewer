@@ -3,6 +3,7 @@ import SwiftUI
 enum SidebarItem: Hashable {
     case gallery
     case playground
+    case compare
     case demo(String)
 
     /// `-demo <id>` launch argument (or "gallery" / "playground").
@@ -15,6 +16,7 @@ enum SidebarItem: Hashable {
         switch id {
         case "gallery": self = .gallery
         case "playground": self = .playground
+        case "compare": self = .compare
         default:
             guard DemoCatalog.demo(id: id) != nil else { return nil }
             self = .demo(id)
@@ -36,6 +38,9 @@ struct ContentView: View {
                     #if os(macOS)
                     NavigationLink(value: SidebarItem.playground) {
                         Label("Playground", systemImage: "chevron.left.forwardslash.chevron.right")
+                    }
+                    NavigationLink(value: SidebarItem.compare) {
+                        Label("Compare with upstream", systemImage: "rectangle.split.2x1")
                     }
                     #endif
                     #if os(visionOS)
@@ -137,6 +142,12 @@ struct ContentView: View {
             PlaygroundView()
             #else
             Text("The Playground is macOS-only for now.")
+            #endif
+        case .compare?:
+            #if os(macOS)
+            CompareView()
+            #else
+            Text("Compare is macOS-only for now.")
             #endif
         default:
             GalleryGrid(values: values) { selection = .demo($0.id) }

@@ -6,5 +6,9 @@
 	     Used by the macOS Playground to flatten #include lines at runtime. -->
 	<key>LygiaSourceRoot</key>
 	<string>$(LYGIA_SOURCE_ROOT)</string>
+	<!-- Folder with an export of upstream LYGIA main (see the Export upstream
+	     build step). The macOS Compare view renders snippets with both. -->
+	<key>LygiaUpstreamRoot</key>
+	<string>$(LYGIA_UPSTREAM_ROOT)</string>
 </dict>
 </plist>

@@ -42,7 +42,7 @@ struct IncludeFlattener {
                 continue
             }
             guard let url = resolve(target, from: directory) else {
-                throw Failure(message: "\(displayName):\(index + 1): cannot find include \"\(target)\" (search roots: \(searchRoots.map(\.path).joined(separator: ", ")))")
+                throw Failure(message: "\(displayName):\(index + 1): cannot find include \"\(target)\" (searched \(searchRoots.map { ($0.path as NSString).abbreviatingWithTildeInPath }.joined(separator: ", ")))")
             }
             let key = url.standardizedFileURL.resolvingSymlinksInPath().path
             if stack.contains(key) {
