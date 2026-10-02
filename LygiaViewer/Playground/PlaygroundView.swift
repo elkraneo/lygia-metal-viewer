@@ -116,7 +116,8 @@ struct PlaygroundView: View {
     }
 }
 
-/// Plain NSTextView: SwiftUI's TextEditor applies smart quotes, which break `#include "..."`.
+/// NSTextView with Metal syntax coloring. SwiftUI's TextEditor applies smart
+/// quotes, which break `#include "..."`, so this is AppKit.
 struct CodeEditor: NSViewRepresentable {
     @Binding var text: String
 
@@ -133,15 +134,23 @@ struct CodeEditor: NSViewRepresentable {
         textView.isContinuousSpellCheckingEnabled = false
         textView.isRichText = false
         textView.allowsUndo = true
-        textView.textContainerInset = NSSize(width: 6, height: 8)
+        textView.textContainerInset = NSSize(width: 10, height: 10)
+        textView.backgroundColor = NSColor.textBackgroundColor.blended(withFraction: 0.5, of: .windowBackgroundColor) ?? .textBackgroundColor
         textView.string = text
         textView.delegate = context.coordinator
+        if let storage = textView.textStorage { MetalSyntax.highlight(storage, lygia: Self.lygiaNames(in: text)) }
         return scroll
     }
 
     func updateNSView(_ scroll: NSScrollView, context: Context) {
         guard let textView = scroll.documentView as? NSTextView, textView.string != text else { return }
         textView.string = text
+        if let storage = textView.textStorage { MetalSyntax.highlight(storage, lygia: Self.lygiaNames(in: text)) }
+    }
+
+    /// Function names from the snippet's own `#include "lygia/..."` lines.
+    static func lygiaNames(in text: String) -> Set<String> {
+        ShaderSource.functionNames(for: ShaderSource.lygiaIncludes(in: text))
     }
 
     final class Coordinator: NSObject, NSTextViewDelegate {
@@ -151,6 +160,8 @@ struct CodeEditor: NSViewRepresentable {
         func textDidChange(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView else { return }
             text.wrappedValue = textView.string
+            // Recolor after the edit; the typing attributes stay plain so new text starts uncolored.
+            if let storage = textView.textStorage { MetalSyntax.highlight(storage, lygia: CodeEditor.lygiaNames(in: textView.string)) }
         }
     }
 }

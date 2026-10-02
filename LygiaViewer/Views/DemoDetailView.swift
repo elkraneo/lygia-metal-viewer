@@ -154,15 +154,15 @@ struct ParamControl: View {
     }
 }
 
-/// Monospaced, selectable source with light highlighting: comments,
-/// preprocessor lines and LYGIA function names.
+/// Monospaced, selectable source with Metal syntax coloring; `highlight`
+/// holds the LYGIA function names to call out.
 struct CodeText: View {
     let text: String
     let highlight: Set<String>
 
     var body: some View {
         ScrollView(.horizontal) {
-            Text(attributed)
+            Text(MetalSyntax.attributed(text, lygia: highlight))
                 .font(.system(.caption, design: .monospaced))
                 .textSelection(.enabled)
                 .fixedSize()
@@ -170,51 +170,6 @@ struct CodeText: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(.quaternary.opacity(0.5), in: .rect(cornerRadius: 8))
-    }
-
-    private var attributed: AttributedString {
-        var result = AttributedString()
-        for (i, line) in text.split(separator: "\n", omittingEmptySubsequences: false).enumerated() {
-            if i > 0 { result += AttributedString("\n") }
-            let trimmed = line.trimmingCharacters(in: .whitespaces)
-            if trimmed.hasPrefix("//") {
-                var part = AttributedString(line)
-                part.foregroundColor = .secondary
-                result += part
-            } else if trimmed.hasPrefix("#") {
-                var part = AttributedString(line)
-                part.foregroundColor = .purple
-                result += part
-            } else {
-                result += highlightWords(in: String(line))
-            }
-        }
-        return result
-    }
-
-    private func highlightWords(in line: String) -> AttributedString {
-        var result = AttributedString()
-        var word = ""
-        func flushWord() {
-            guard !word.isEmpty else { return }
-            var part = AttributedString(word)
-            if highlight.contains(word.lowercased()) {
-                part.foregroundColor = .accentColor
-                part.inlinePresentationIntent = .stronglyEmphasized
-            }
-            result += part
-            word = ""
-        }
-        for ch in line {
-            if ch.isLetter || ch.isNumber || ch == "_" {
-                word.append(ch)
-            } else {
-                flushWord()
-                result += AttributedString(String(ch))
-            }
-        }
-        flushWord()
-        return result
     }
 }
 

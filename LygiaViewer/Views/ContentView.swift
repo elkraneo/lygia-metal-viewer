@@ -27,6 +27,8 @@ enum SidebarItem: Hashable {
 struct ContentView: View {
     @State private var selection: SidebarItem? = SidebarItem.initial
     @State private var values: [String: SIMD4<Float>] = [:]
+    /// Settings > Developer. The View menu's "Compare with Upstream" also turns it on.
+    @AppStorage("showCompare") private var showCompare = false
 
     var body: some View {
         NavigationSplitView {
@@ -39,8 +41,10 @@ struct ContentView: View {
                     NavigationLink(value: SidebarItem.playground) {
                         Label("Playground", systemImage: "chevron.left.forwardslash.chevron.right")
                     }
-                    NavigationLink(value: SidebarItem.compare) {
-                        Label("Compare with upstream", systemImage: "rectangle.split.2x1")
+                    if showCompare {
+                        NavigationLink(value: SidebarItem.compare) {
+                            Label("Compare with upstream", systemImage: "rectangle.split.2x1")
+                        }
                     }
                     #endif
                     #if os(visionOS)
@@ -63,6 +67,10 @@ struct ContentView: View {
             #endif
         } detail: {
             detail
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .showCompare)) { _ in
+            showCompare = true
+            selection = .compare
         }
         .task {
             await ShaderValidation.runIfRequested()
@@ -164,4 +172,9 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+}
+
+extension Notification.Name {
+    /// Posted by the View menu to open the Compare view.
+    static let showCompare = Notification.Name("LygiaViewer.showCompare")
 }
